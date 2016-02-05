@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/pickyouballonbackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="30dp">
+    <RelativeLayout
+        android:id="@+id/relative11"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="3dp"
+
+        >
+
+        <ImageView
+            android:id="@+id/balloon12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/balloon2"
+           />
+
+        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative12"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="3dp"
+
+        >
+        <ImageView
+            android:id="@+id/balloon13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+           android:src="@drawable/balloon3"/>
+
+    </RelativeLayout>
+<RelativeLayout
+android:id="@+id/relative13"
+android:layout_width="0dp"
+android:layout_height="match_parent"
+android:layout_weight="1"
+android:orientation="horizontal"
+    android:padding="3dp"
+
+    >
+        <ImageView
+            android:id="@+id/balloon21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+           android:src="@drawable/balloon4"/>
+
+</RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="30dp">
+        <RelativeLayout
+            android:id="@+id/relative21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="3dp"
+
+            >
+            <ImageView
+                android:id="@+id/balloon22"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              android:src="@drawable/balloon5"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative22"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="3dp"
+
+            >
+            <ImageView
+                android:id="@+id/balloon23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+               android:src="@drawable/balloon6"/>
+
+        </RelativeLayout>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/relative23"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="3dp"-->
+            <!-->-->
+            <!--<ImageView-->
+                <!--android:id="@+id/balloon31"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:src="@drawable/lockbaloon7"/>-->
+
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="30dp">
+        <RelativeLayout
+            android:id="@+id/relative31"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            >
+            <ImageView
+                android:id="@+id/balloon31"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+               android:src="@drawable/lockbaloon7"
+                />
+            <ImageView
+                android:id="@+id/balloon311"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/balloon7"
+                android:visibility="invisible"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative32"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            >
+            <ImageView
+                android:id="@+id/balloon32"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/lockbaloon7"
+               />
+            <ImageView
+                android:id="@+id/balloon322"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/balloon8"
+                android:visibility="invisible"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            >
+            <ImageView
+                android:id="@+id/balloon33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/lockbaloon7"
+                />
+            <ImageView
+                android:id="@+id/balloon333"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/balloon9"
+                android:visibility="invisible"
+                />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/picknumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick Your Number"
+        android:textColor="#ffffff"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/howlnr"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:orientation="vertical">-->
+
+
+        <!--<ImageView-->
+            <!--android:id="@+id/how"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:src="@drawable/how"-->
+            <!--android:background="@android:color/transparent"-->
+           <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/howtxt"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="HOW"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+</RelativeLayout>

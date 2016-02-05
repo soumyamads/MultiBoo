@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MultiBoo</string>
+    <string name="crash_toast_text" />
+</resources>

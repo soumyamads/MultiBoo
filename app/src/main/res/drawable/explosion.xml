@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false"
+    android:pivotX="50%"
+    android:pivotY="50%" >
+    <item android:drawable="@drawable/blast"
+        android:duration="200"
+        />
+    <!--<item android:drawable="@drawable/p2_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p3_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p4_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p5_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p6_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p7_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p8_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p9_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p10_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p11_wheel" android:duration="200"/>-->
+    <!--<item android:drawable="@drawable/p12_wheel" android:duration="200"/>-->
+</animation-list>

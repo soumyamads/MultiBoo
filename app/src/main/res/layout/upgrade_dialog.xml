@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:padding="10dp">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/game_over"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:background="@drawable/upgradedialog">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <!--<TextView-->
+                <!--android:id="@+id/upgrdhead"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="Upgrade to Full"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="20dp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="35dp"-->
+
+                <!--/>-->
+
+            <TextView
+                android:id="@+id/upgradetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text=" Get access to the levels 7, 8 and 9 for only "
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:lineSpacingExtra="@dimen/activity_vertical_margin"
+              android:textStyle="bold"
+             />
+            <TextView
+                android:id="@+id/Rs49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Rs. 49"
+                android:layout_gravity="center"
+                android:textColor="#ff0000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/buynw"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="BUY NOW"
+                android:textColor="#ffffff"
+                android:background="@drawable/buy_btn"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/game_over">
+
+        <!--<ImageView-->
+        <!--android:id="@+id/menu"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:background="@drawable/main_menu"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:layout_centerInParent="true" />-->
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/no"
+            android:layout_centerInParent="true"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

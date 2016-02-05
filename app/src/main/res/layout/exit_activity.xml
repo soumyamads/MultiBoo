@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:padding="10dp">
+
+
+
+
+    <LinearLayout
+        android:id="@+id/game_over"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/gameover">
+
+
+    </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/game_over_scorevalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Are you sure to want Quit?"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/game_over">
+
+
+
+        <ImageView
+            android:id="@+id/no"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/no"
+            android:scaleType="fitXY"
+            android:layout_marginTop="20dp"
+
+            />
+        <ImageView
+            android:id="@+id/yes"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/yes"
+            android:scaleType="fitXY"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+        />
+    </LinearLayout>
+
+</RelativeLayout>

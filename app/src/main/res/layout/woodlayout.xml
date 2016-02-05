@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+    android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/wall"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <ImageView
+
+            android:id="@+id/life11"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/blankballon1"
+            android:background="?selectableItemBackground"
+            />
+        <ImageView
+
+            android:id="@+id/life21"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/blankballon6"
+            android:background="?selectableItemBackground"
+            />
+        <ImageView
+
+            android:id="@+id/life31"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/blankballon7"
+            android:background="?selectableItemBackground"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/score1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="score:"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center" />
+            <TextView
+                android:id="@+id/score_value1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:layout_marginLeft="5dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
