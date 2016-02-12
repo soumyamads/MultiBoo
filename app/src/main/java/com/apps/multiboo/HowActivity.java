@@ -19,16 +19,19 @@ import com.apps.multiboo.R;
  * Created by snyxius on 28/1/16.
  */
 public class HowActivity extends FragmentActivity {
-
+    static ViewPager pager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.one);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
+        pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
     }
+    public static void  pageclick(int page){
+        pager.setCurrentItem(page);
 
+    }
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
         public MyPagerAdapter(FragmentManager fm) {
@@ -49,6 +52,7 @@ public class HowActivity extends FragmentActivity {
 // Screenshotone.newInstance("FirstFragment, Default");
             }
         }
+
 
         @Override
         public int getCount() {

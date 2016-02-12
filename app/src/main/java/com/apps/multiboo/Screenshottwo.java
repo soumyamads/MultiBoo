@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,32 +28,34 @@ public class Screenshottwo extends Fragment {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean isFirstTime;
+                Boolean FirstTime;
 
-                SharedPreferences app_preferences = PreferenceManager
+                SharedPreferences preferences = PreferenceManager
                         .getDefaultSharedPreferences(getActivity());
 
-                SharedPreferences.Editor editor = app_preferences.edit();
+                SharedPreferences.Editor editor = preferences.edit();
 
-                isFirstTime = app_preferences.getBoolean("isFirstTime", true);
-
-                if (isFirstTime) {
+                FirstTime = preferences.getBoolean("FirstTime", true);
+                Log.d(String.valueOf(FirstTime), "Firsttime");
+                if (FirstTime) {
 //                    Musiccontinue=true;
                     Intent intent = new Intent(getActivity(), SelectnumberActivity.class);
                     startActivity(intent);
                     getActivity().finish();
-
-//                    finish();
 //implement your first time logic
-                    editor.putBoolean("isFirstTime", false);
+                    editor.putBoolean("FirstTime", false);
                     editor.commit();
+                    Log.d(String.valueOf(FirstTime), "fnt");
+
 
                 }else{
 //app open directly
 //                    Musiccontinue=true;
                     Intent intent = new Intent(getActivity(), Menupage.class);
                     startActivity(intent);
-                    getActivity().finish();
+                    Log.d(String.valueOf(FirstTime), "else");
+
+                   getActivity(). finish();
                 }
 
 

@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apps.multiboo.R;
 
@@ -78,6 +79,8 @@ public class Sample2 extends Activity {
             R.drawable.blankballon7,
             R.drawable.blankballon8,
             R.drawable.blankballon9,
+            R.drawable.star,
+            R.drawable.bomb,
 
     };
 
@@ -140,8 +143,6 @@ public class Sample2 extends Activity {
         height = metrics.heightPixels;
         width = metrics.widthPixels;
 
-        System.out.print("topscreen" + mDisplaySize.top);
-        System.out.print("widtyh" + width);
         Log.d(String.valueOf(mDisplaySize.bottom), "top");
         Log.d(String.valueOf(height),"hgt");
 
@@ -153,10 +154,10 @@ public class Sample2 extends Activity {
         scoretext = (TextView) findViewById(R.id.score1);
         mRootLayout = (RelativeLayout) findViewById(R.id.main_layout);
         pausebutton = (ImageView) findViewById(R.id.pause);
-
-
-
         pausebutton.setEnabled(true);
+
+        //getting balloon number which click
+
         Bundle b = getIntent().getExtras();
         mInt = b.getInt("Integer");
 
@@ -189,6 +190,7 @@ public class Sample2 extends Activity {
 
 
 //        Toast.makeText(getApplication(), "speed11=" + animDuration+"pop11=" + popupDuration, Toast.LENGTH_LONG).show();
+//        startAnimation(relativeLayout);
 
 
     }
@@ -232,7 +234,7 @@ public class Sample2 extends Activity {
 
             }
         });
-        animator.addListener(new AnimatorListenerAdapter() {
+       animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
@@ -263,6 +265,10 @@ public class Sample2 extends Activity {
                             dialog.setContentView(R.layout.gameover);
                             dialog.setCancelable(false);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.show();
+
+
+
                             gameover = true;
                             animator.end();
 
@@ -360,10 +366,11 @@ public class Sample2 extends Activity {
 //
 //                            dialog.dismiss();
 //                            gameover = false;
-
-                                    dialog.dismiss();
                                     task2.cancel();
                                     task1.cancel();
+                                    stopTask();
+                                    dialog.dismiss();
+
                                     Intent intent = new Intent(getApplication(), Sample2.class);
                                     Bundle b = new Bundle();
                                     b.putInt("Integer", mInt);
@@ -379,13 +386,16 @@ public class Sample2 extends Activity {
                             menu.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    task2.cancel();
+                                    task1.cancel();
+                                    stopTask();
+                                    dialog.dismiss();
                                     Intent intent = new Intent(getApplication(), Menupage.class);
                                     startActivity(intent);
-                                    Musiccontinue=true;
+                                    Musiccontinue = true;
                                     finish();
                                 }
                             });
-                            dialog.show();
                             task2.cancel();
                             task1.cancel();
 //mHandler.removeCallbacksAndMessages(null);
@@ -449,13 +459,19 @@ public class Sample2 extends Activity {
             relativeLayout = (RelativeLayout) child.findViewById(R.id.balloon_container);
             imageView = (ImageView) child.findViewById(R.id.aniImageView);
             animtext = (TextView) child.findViewById(R.id.numbertext);
+            Drawable sDraw = getResources().getDrawable(R.drawable.star);
+            Drawable tDraw = getResources().getDrawable(R.drawable.bomb);
+           if( d.getConstantState().equals
+                    (getResources().getDrawable(R.drawable.star).getConstantState())||d.getConstantState().equals
+                   (getResources().getDrawable(R.drawable.bomb).getConstantState()))
+            {
+            System.out.println("star");
+                animtext.setVisibility(View.GONE);
+            }
 
-//            animtext1=(TextView)child.findViewById(R.id.numbertext1);
-
-//            animtext.setTypeface(Typeface.createFromAsset(ath));
             animtext.setTypeface(custom_font);
-
             imageView.setImageDrawable(d);
+
 //            task1 = new ExeTimerTask();
 //            new Timer().schedule(task1, delayValue, popupDuration);
 //
@@ -532,7 +548,7 @@ public class Sample2 extends Activity {
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                  ImageView bombs ,stars ;
 
                     int num = Integer.valueOf(v.getTag().toString());
 
@@ -545,6 +561,12 @@ public class Sample2 extends Activity {
                         scorevalue.setText(String.valueOf(n));
                         relativeLayout1 = (RelativeLayout) v;
                         final ImageView imageView1 = (ImageView) relativeLayout1.findViewById(R.id.aniImageView);
+
+                        if (imageView1.equals((getResources().getDrawable(R.drawable.star)))) {
+                            Toast.makeText(getApplicationContext(),"bomb",Toast.LENGTH_LONG);
+
+                        }
+
                         imageView1.setImageResource(R.drawable.blast);
                         TextView numbertext = (TextView) relativeLayout1.findViewById(R.id.numbertext);
                         mp = MediaPlayer.create(Sample2.this, R.raw.correctblast);
@@ -677,8 +699,10 @@ public class Sample2 extends Activity {
                             menu = (ImageView) dialog.findViewById(R.id.menu);
                             gamescorevalue.setTypeface(custom_font);
                             gamescore.setTypeface(custom_font);
-                            mRootLayout.removeAllViews();
                             stopTask();
+                            task1.cancel();
+                            task2.cancel();
+                            mRootLayout.removeAllViews();
 
                             String dateFormat = "dd/MM";
                             Calendar cal = Calendar.getInstance();
@@ -820,20 +844,20 @@ public class Sample2 extends Activity {
 
 //            RelativeLayout relativeLayout=(RelativeLayout)inflate.inflate(R.layout.duplicate,null);
 //            relativeLayout.setBackgroundResource();
-//            relativeLayout.setBackgroundResource(d);
+//            relativeLayout.setBackgroundResource();
             mRootLayout.addView(relativeLayout);
 
 
             RelativeLayout.LayoutParams animationLayout = (RelativeLayout.LayoutParams) relativeLayout.getLayoutParams();
             animationLayout.setMargins(0, (int) (-180 * mScale), 0, 0);
-            Log.d("x", "" + (int) (mScale));
+//            Log.d("x", "" + (int) (mScale));
 
             startAnimation(relativeLayout);
 
 
         }
     };
-
+//generating multiplication value
     private static int getRandomMultplication(int i, int i1) {
         Random r = new Random();
         int values = r.nextInt((i1 - i) + i) * mInt;
@@ -844,7 +868,7 @@ public class Sample2 extends Activity {
         return values;
 
     }
-
+//generating random numbers
 
     public static int getRandom(int startvalue, int endvalue) {
 
@@ -868,8 +892,8 @@ public class Sample2 extends Activity {
                     task1.cancel();
                     task2.cancel();
 
-                    if (animDuration>2800) {
-                        animDuration=animDuration-400;
+                    if (animDuration>3000) {
+                        animDuration=animDuration-500;
 
                         task2 = new MyTask();
                         new Timer().schedule(task2, animDuration, animDuration);
@@ -1026,7 +1050,6 @@ public class Sample2 extends Activity {
 
     @Override
     public void onBackPressed() {
-//        finish();
         mRootLayout.removeAllViews();
         mRootLayout.addView(pausebutton);
 
@@ -1041,33 +1064,15 @@ public class Sample2 extends Activity {
         mHandler.removeCallbacksAndMessages(null);
         task1.cancel();
         task2.cancel();
-//        stopService(new Intent(this, BackgroundSoundService.class));
-
         super.onDestroy();
     }
-
-//    @Override
-//    protected void onStart() {
-//
-//        task1=new ExeTimerTask();
-//        new Timer().schedule(task1,900 , popupDuration);
-//        task2=new MyTask();
-//
-//        new Timer().schedule(task2, 15000, 15000);
-//        super.onStart();
-//    }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        stopService(new Intent(this, BackgroundSoundService.class));
         task1.cancel();
         task2.cancel();
-//        backgroundmusic.release();
-//        stopService(svc);
-//        stopService(new Intent(this, BackgroundSoundService.class));
 
-//        finish();
     }
 
     @Override
@@ -1083,14 +1088,6 @@ public class Sample2 extends Activity {
             task2.cancel();
             Onpausing();
         }
-
-//        startService(new Intent(this, BackgroundSoundService.class));
-//        task1=new ExeTimerTask();
-//
-//        new Timer().schedule(task1,900 , popupDuration);
-//        task2=new MyTask();
-//
-//        new Timer().schedule(task2, 15000, 15000);
 
     }
 

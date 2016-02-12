@@ -4,34 +4,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/screenshotone">
-   <!--<RelativeLayout-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:layout_alignParentBottom="true"-->
-       <!--android:paddingBottom="100dp">-->
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:paddingBottom="100dp">
 
-       <!--<TextView-->
-           <!--android:id="@+id/next"-->
-           <!--android:layout_width="wrap_content"-->
-           <!--android:layout_height="wrap_content"-->
-           <!--android:text="NEXT"-->
-           <!--android:textColor="#ffffff"-->
-           <!--android:textStyle="bold"-->
+       <TextView
+           android:id="@+id/next"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="NEXT"
+           android:textColor="#ffffff"
+           android:textStyle="bold"
 
-           <!--android:padding="20dp"-->
-           <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-           <!--android:layout_alignParentRight="true"/>-->
+           android:padding="20dp"
+           android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+           android:layout_alignParentRight="true"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/skip"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-         <!--android:text="SKIP"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:padding="20dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--android:layout_alignParentLeft="true"/>-->
-   <!--</RelativeLayout>-->
+    <TextView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:text="SKIP"
+        android:textColor="#ffffff"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+android:layout_alignParentLeft="true"/>
+   </RelativeLayout>
 
 </RelativeLayout>

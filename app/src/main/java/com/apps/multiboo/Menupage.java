@@ -263,6 +263,7 @@ editor.commit();
                     public void onClick(View v) {
                         Intent intent=new Intent(getApplication(),HelpActivity.class);
                         startActivity(intent);
+                        finish();
 
                     }
                 });

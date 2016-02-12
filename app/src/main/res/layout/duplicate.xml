@@ -22,12 +22,7 @@
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#ffffff" />
-    <!--<ImageView-->
-        <!--android:id="@+id/aniImageView1"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="150dp"-->
-        <!--android:layout_marginLeft="200dp"-->
-        <!--android:src="@drawable/blankballon1" />-->
+
     <!--<TextView-->
         <!--android:id="@+id/numbertext1"-->
         <!--android:layout_width="wrap_content"-->
