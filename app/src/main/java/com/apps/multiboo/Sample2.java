@@ -79,7 +79,7 @@ public class Sample2 extends Activity {
             R.drawable.blankballon7,
             R.drawable.blankballon8,
             R.drawable.blankballon9,
-            R.drawable.star,
+            R.drawable.star1,
             R.drawable.bomb,
 
     };
@@ -94,12 +94,12 @@ public class Sample2 extends Activity {
     private float mScale;
     ImageView imageView, pausebutton;
     ImageView resume, level, score, exit;
-    TextView gamescore, gamescorevalue;
+    TextView gamescore, gamescorevalue, numbertext;
     ImageView replay, menu;
     ImageView life1, life2, life3;
     TextView scorevalue, scoretext;
     Typeface custom_font;
-    RelativeLayout relativeLayout1;
+    RelativeLayout relativeLayout1,relativeLayout3;
     MyTask task2;
     ExeTimerTask task1;
 
@@ -111,7 +111,7 @@ public class Sample2 extends Activity {
     int num1;
     Boolean Musiccontinue=false;
     Boolean pause=false;
-    Boolean resumes=false;
+    Boolean star=false;
 
 
     //    Intent svc;
@@ -235,213 +235,47 @@ public class Sample2 extends Activity {
             }
         });
        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
+           @Override
+           public void onAnimationEnd(Animator animation) {
+               super.onAnimationEnd(animation);
 
-                if (!gameover) {
-                    if(!pause){
-                    RelativeLayout rl = (RelativeLayout) aniView;
-                    final ImageView imageView1 = (ImageView) rl.findViewById(R.id.aniImageView);
+               if (!gameover) {
+                   if (!pause) {
+                       RelativeLayout rl = (RelativeLayout) aniView;
+                       final ImageView imageView1 = (ImageView) rl.findViewById(R.id.aniImageView);
 //        imageView1.setImageResource(R.drawable.blast);
-                    final TextView numbertext = (TextView) rl.findViewById(R.id.numbertext);
-                    CharSequence value1 = numbertext.getText();
+                       final TextView numbertext = (TextView) rl.findViewById(R.id.numbertext);
+                       CharSequence value1 = numbertext.getText();
 
-                    num1 = Integer.parseInt(value1.toString());
+                       num1 = Integer.parseInt(value1.toString());
 
 //            Toast.makeText(getApplication(), "NUmber" + num1+"mint"+mInt, Toast.LENGTH_SHORT).show();
 //            mHandler.removeCallbacksAndMessages(null);
 
-                    if (num1 % mInt == 0) {
-
-                        if (lifecounter == 3) {
-                            task2.cancel();
-                            task1.cancel();
-                            mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
-                            mp.start();
-                            final Dialog dialog = new Dialog(Sample2.this);
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                            dialog.setContentView(R.layout.gameover);
-                            dialog.setCancelable(false);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            dialog.show();
+                       if (num1 % mInt == 0) {
+                           gameoverlife();
 
 
+                       }
+                   }
 
-                            gameover = true;
-                            animator.end();
-
-
-                            gamescore = (TextView) dialog.findViewById(R.id.game_over_score);
-                            gamescorevalue = (TextView) dialog.findViewById(R.id.game_over_scorevalue);
-                            replay = (ImageView) dialog.findViewById(R.id.replay);
-                            menu = (ImageView) dialog.findViewById(R.id.menu);
-                            gamescorevalue.setTypeface(custom_font);
-                            gamescore.setTypeface(custom_font);
-                            mRootLayout.removeAllViews();
+               }
+           }
 
 
-                            task2.cancel();
-                            task1.cancel();
-//                    stopTask();
+           @Override
+           public void onAnimationRepeat(Animator animation) {
+               super.onAnimationRepeat(animation);
+               animator.cancel();
+               task1.cancel();
+               task2.cancel();
+           }
 
-                            String dateFormat = "dd/MM";
-                            Calendar cal = Calendar.getInstance();
-                            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-                            String date = sdf.format(cal.getTime());
-
-                            final int starting = 0;
-                            int score_value = Integer.parseInt(scorevalue.getText().toString());
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-
-
-                            if (first_play) {
-                                highscore = score_value;
-
-                                ContentValues values = new ContentValues();
-                                values.put("Date", date);
-                                values.put("Score", highscore);
-                                long res = db.insert("scoretable", null, values);
-
-                                first_play = false;
-                            } else {
-                                if (score_value > highscore) {
-
-                                    highscore = score_value;
-
-                                    ContentValues values = new ContentValues();
-                                    values.put("Date", date);
-                                    values.put("Score", highscore);
-                                    long res = db.insert("scoretable", null, values);
-//                                    if(res!=-1){
-//                                        Toast.makeText(getApplicationContext(),"values insert",Toast.LENGTH_LONG).show();
-//                                    }
-//                                    else {
-//                                        Toast.makeText(getApplicationContext(),"not insert",Toast.LENGTH_LONG).show();
-//
-//
-////                                    }
-                                }
-
-                            }
-
-//animation for highscore inside gameover
-                            final ValueAnimator animator = new ValueAnimator();
-                            animator.setObjectValues(0, score_value);
-                            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                public void onAnimationUpdate(ValueAnimator animation) {
-                                    gamescorevalue.setText(String.valueOf(animation.getAnimatedValue()));
-                                }
-                            });
-                            animator.setEvaluator(new TypeEvaluator<Integer>() {
-                                public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-                                    return Math.round(startValue + (endValue - startValue) * fraction);
-                                }
-                            });
-                            animator.setDuration(1000);
-                            animator.end();
-                            animator.start();
-
-//                            gamescorevalue.setText(scorevalue.getText());
-                            replay.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-//animator.start();
-//                            mRootLayout.addView(pausebutton);
-//                            life1.setVisibility(View.VISIBLE);
-//                            life2.setVisibility(View.VISIBLE);
-//
-//                            life3.setVisibility(View.VISIBLE);
-//                            scorevalue.setText(String.valueOf(0));
-//                            n = 0;
-//                                    animDuration=9500;
-//                                    popupDuration=1200;
-//                                    delayValue=1000;
-//                            task1 = new ExeTimerTask();
-//                            new Timer().schedule(task1, delayValue, popupDuration);
-//                            task2 = new MyTask();
-//
-//                            new Timer().schedule(task2, animDuration, animDuration);
-//
-//                            dialog.dismiss();
-//                            gameover = false;
-                                    task2.cancel();
-                                    task1.cancel();
-                                    stopTask();
-                                    dialog.dismiss();
-
-                                    Intent intent = new Intent(getApplication(), Sample2.class);
-                                    Bundle b = new Bundle();
-                                    b.putInt("Integer", mInt);
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                    gameover = false;
-                                    Musiccontinue=true;
-
-                                    finish();
-
-                                }
-                            });
-                            menu.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    task2.cancel();
-                                    task1.cancel();
-                                    stopTask();
-                                    dialog.dismiss();
-                                    Intent intent = new Intent(getApplication(), Menupage.class);
-                                    startActivity(intent);
-                                    Musiccontinue = true;
-                                    finish();
-                                }
-                            });
-                            task2.cancel();
-                            task1.cancel();
-//mHandler.removeCallbacksAndMessages(null);
-
-                            lifecounter = 0;
-                        } else {
-                            if (lifecounter == 0) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongclick);
-//                                mp.start();
-                                life3.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-                            } else if (lifecounter == 1) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
-//                                mp.start();
-                                life2.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-
-                            } else if (lifecounter == 2) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
-//                                mp.start();
-                                life1.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-
-                            }
-
-                        }
-                    }
-                    }
-
-                }
-            }
-
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                super.onAnimationRepeat(animation);
-                animator.cancel();
-                task1.cancel();
-                task2.cancel();
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-            }
-        });
+           @Override
+           public void onAnimationStart(Animator animation) {
+               super.onAnimationStart(animation);
+           }
+       });
 
         animator.start();
     }
@@ -457,16 +291,18 @@ public class Sample2 extends Activity {
 
             View child = getLayoutInflater().inflate(R.layout.duplicate, null);
             relativeLayout = (RelativeLayout) child.findViewById(R.id.balloon_container);
+            relativeLayout3 = (RelativeLayout) child.findViewById(R.id.star_container);
+
             imageView = (ImageView) child.findViewById(R.id.aniImageView);
             animtext = (TextView) child.findViewById(R.id.numbertext);
-            Drawable sDraw = getResources().getDrawable(R.drawable.star);
-            Drawable tDraw = getResources().getDrawable(R.drawable.bomb);
+//
            if( d.getConstantState().equals
-                    (getResources().getDrawable(R.drawable.star).getConstantState())||d.getConstantState().equals
+                    (getResources().getDrawable(R.drawable.star1).getConstantState())||d.getConstantState().equals
                    (getResources().getDrawable(R.drawable.bomb).getConstantState()))
             {
             System.out.println("star");
-                animtext.setVisibility(View.GONE);
+                animtext.setVisibility(View.INVISIBLE);
+//relativeLayout.removeView(animtext);
             }
 
             animtext.setTypeface(custom_font);
@@ -556,19 +392,38 @@ public class Sample2 extends Activity {
 
                     if (num % mInt == 0) {
 
+                        //seeting score by 10
                         n += 10;
 
                         scorevalue.setText(String.valueOf(n));
+
                         relativeLayout1 = (RelativeLayout) v;
                         final ImageView imageView1 = (ImageView) relativeLayout1.findViewById(R.id.aniImageView);
+                        if(imageView1.getDrawable().getConstantState()==Sample2.this.getResources().getDrawable(R.drawable.star1).getConstantState())
+                        {
+                            Toast.makeText(getApplicationContext(),"star",Toast.LENGTH_LONG).show();
+                            n+=90;
+                            scorevalue.setText(String.valueOf(n));
 
-                        if (imageView1.equals((getResources().getDrawable(R.drawable.star)))) {
-                            Toast.makeText(getApplicationContext(),"bomb",Toast.LENGTH_LONG);
+                            imageView1.setImageResource(R.drawable.star_explosion);
 
                         }
+                       else if(imageView1.getDrawable().getConstantState()==Sample2.this.getResources().getDrawable(R.drawable.bomb).getConstantState())
+                        {
+                            Toast.makeText(getApplicationContext(),"bomb",Toast.LENGTH_LONG).show();
+                            n+=-10;
+                            scorevalue.setText(String.valueOf(n));
+                            imageView1.setImageResource(R.drawable.bomb_explosion);
+
+
+                            gameoverlife();
+
+
+}
+
 
                         imageView1.setImageResource(R.drawable.blast);
-                        TextView numbertext = (TextView) relativeLayout1.findViewById(R.id.numbertext);
+                        numbertext = (TextView) relativeLayout1.findViewById(R.id.numbertext);
                         mp = MediaPlayer.create(Sample2.this, R.raw.correctblast);
                         mp.start();
 
@@ -630,8 +485,31 @@ public class Sample2 extends Activity {
                         relativeLayout1 = (RelativeLayout) v;
 
                         final ImageView imageView1 = (ImageView) relativeLayout1.findViewById(R.id.aniImageView);
+                        if(imageView1.getDrawable().getConstantState()==Sample2.this.getResources().getDrawable(R.drawable.star1).getConstantState())
+                        {
+//                            CharSequence value1 = numbertext.getText();
+
+//                            num1 = Integer.parseInt(value1.toString());
+//                            numbertext.setText(String.valueOf(0 +mInt ));
+                            Toast.makeText(getApplicationContext(),"star",Toast.LENGTH_LONG).show();
+                            n+=100;
+                            scorevalue.setText(String.valueOf(n));
+                            imageView1.setImageResource(R.drawable.star_explosion);
+
+
+
+
+                        }
+                      else  if(imageView1.getDrawable().getConstantState()==Sample2.this.getResources().getDrawable(R.drawable.bomb).getConstantState())
+                        {
+                            Toast.makeText(getApplicationContext(),"bomb",Toast.LENGTH_LONG).show();
+
+//                            gameoverlife();
+                            imageView1.setImageResource(R.drawable.bomb_explosion);
+
+
+                        }
                         imageView1.setImageResource(R.drawable.wrongblast);
-//                        TextView numbertext = (TextView) relativeLayout1.findViewById(R.id.numbertext);
 
                         mp = MediaPlayer.create(Sample2.this, R.raw.wrongclick);
                         mp.start();
@@ -681,160 +559,9 @@ public class Sample2 extends Activity {
 
                             }
                         });
-
-                        if (lifecounter == 3) {
-                            mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
-                            mp.start();
-                            final Dialog dialog = new Dialog(Sample2.this);
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                            dialog.setContentView(R.layout.gameover);
-                            dialog.setCancelable(false);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        gameoverlife();
 
 
-                            gamescore = (TextView) dialog.findViewById(R.id.game_over_score);
-                            gamescorevalue = (TextView) dialog.findViewById(R.id.game_over_scorevalue);
-                            replay = (ImageView) dialog.findViewById(R.id.replay);
-                            menu = (ImageView) dialog.findViewById(R.id.menu);
-                            gamescorevalue.setTypeface(custom_font);
-                            gamescore.setTypeface(custom_font);
-                            stopTask();
-                            task1.cancel();
-                            task2.cancel();
-                            mRootLayout.removeAllViews();
-
-                            String dateFormat = "dd/MM";
-                            Calendar cal = Calendar.getInstance();
-                            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-                            String date = sdf.format(cal.getTime());
-
-                            final int starting = 0;
-                            int score_value = Integer.parseInt(scorevalue.getText().toString());
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-
-
-                            if(first_play) {
-                                highscore = score_value;
-
-                                ContentValues values = new ContentValues();
-                                values.put("Date", date);
-                                values.put("Score", highscore);
-                                long res=db.insert("scoretable", null, values);
-
-                                first_play=false;
-                            }
-                            else
-                            {
-                                if(score_value>highscore)
-                                {
-
-                                    highscore=score_value;
-
-                                    ContentValues values = new ContentValues();
-                                    values.put("Date", date);
-                                    values.put("Score", highscore);
-                                    long res=db.insert("scoretable", null, values);
-//                                    if(res!=-1){
-//                                        Toast.makeText(getApplicationContext(),"values insert",Toast.LENGTH_LONG).show();
-//                                    }
-//                                    else {
-//                                        Toast.makeText(getApplicationContext(),"not insert",Toast.LENGTH_LONG).show();
-//
-//
-////                                    }
-                                }
-
-                            }
-
-//animation for highscore inside gameover
-                            ValueAnimator animator = new ValueAnimator();
-                            animator.setObjectValues(0, score_value);
-                            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                public void onAnimationUpdate(ValueAnimator animation) {
-                                    gamescorevalue.setText(String.valueOf(animation.getAnimatedValue()));
-                                }
-                            });
-                            animator.setEvaluator(new TypeEvaluator<Integer>() {
-                                public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-                                    return Math.round(startValue + (endValue - startValue) * fraction);
-                                }
-                            });
-                            animator.setDuration(1000);
-                            animator.start();
-
-//                            gamescorevalue.setText(scorevalue.getText());
-                            replay.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-//                                    mRootLayout.addView(pausebutton);
-//                                    life1.setVisibility(View.VISIBLE);
-//                                    life2.setVisibility(View.VISIBLE);
-//
-//                                    life3.setVisibility(View.VISIBLE);
-//                                    scorevalue.setText(String.valueOf(0));
-//                                    n = 0;
-//                                    animDuration=9500;
-//                                    popupDuration=1200;
-//                                    delayValue=1000;
-//                                    task1 = new ExeTimerTask();
-//                                    new Timer().schedule(task1, delayValue, popupDuration);
-//                                    task2 = new MyTask();
-//
-//                                    new Timer().schedule(task2, animDuration, animDuration);
-//
-//                                    dialog.dismiss();
-
-                                    dialog.dismiss();
-                                    task2.cancel();
-                                    task1.cancel();
-                                    Intent intent = new Intent(getApplication(), Sample2.class);
-                                    Bundle b=new Bundle();
-                                    b.putInt("Integer", mInt);
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                    Musiccontinue=true;
-
-                                    finish();
-
-
-                                }
-                            });
-                            menu.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(getApplication(), Menupage.class);
-                                    startActivity(intent);
-                                    Musiccontinue=true;
-                                    finish();
-                                }
-                            });
-                            dialog.show();
-//mHandler.removeCallbacksAndMessages(null);
-                            task2.cancel();
-                            task1.cancel();
-                            lifecounter = 0;
-                        } else {
-                            if (lifecounter == 0) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
-//                                mp.start();
-                                life3.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-                            } else if (lifecounter == 1) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
-//                                mp.start();
-                                life2.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-
-                            } else if (lifecounter == 2) {
-//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
-//                                mp.start();
-                                life1.setVisibility(View.INVISIBLE);
-                                lifecounter++;
-
-                            }
-
-                        }
 
                     }
 
@@ -846,6 +573,8 @@ public class Sample2 extends Activity {
 //            relativeLayout.setBackgroundResource();
 //            relativeLayout.setBackgroundResource();
             mRootLayout.addView(relativeLayout);
+//            mRootLayout.addView(relativeLayout3);
+
 
 
             RelativeLayout.LayoutParams animationLayout = (RelativeLayout.LayoutParams) relativeLayout.getLayoutParams();
@@ -854,6 +583,7 @@ public class Sample2 extends Activity {
 
             startAnimation(relativeLayout);
 
+//            startAnimation(relativeLayout3);
 
         }
     };
@@ -916,6 +646,165 @@ public class Sample2 extends Activity {
         }
 
     }
+private void gameoverlife(){
+    if (lifecounter == 3) {
+        mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
+        mp.start();
+        final Dialog dialog = new Dialog(Sample2.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.setContentView(R.layout.gameover);
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+        gamescore = (TextView) dialog.findViewById(R.id.game_over_score);
+        gamescorevalue = (TextView) dialog.findViewById(R.id.game_over_scorevalue);
+        replay = (ImageView) dialog.findViewById(R.id.replay);
+        menu = (ImageView) dialog.findViewById(R.id.menu);
+        gamescorevalue.setTypeface(custom_font);
+        gamescore.setTypeface(custom_font);
+        stopTask();
+        task1.cancel();
+        task2.cancel();
+        mRootLayout.removeAllViews();
+
+        String dateFormat = "dd/MM";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        String date = sdf.format(cal.getTime());
+
+        final int starting = 0;
+        int score_value = Integer.parseInt(scorevalue.getText().toString());
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
+        if(first_play) {
+            highscore = score_value;
+
+            ContentValues values = new ContentValues();
+            values.put("Date", date);
+            values.put("Score", highscore);
+            long res=db.insert("scoretable", null, values);
+
+            first_play=false;
+        }
+        else
+        {
+            if(score_value>highscore)
+            {
+
+                highscore=score_value;
+
+                ContentValues values = new ContentValues();
+                values.put("Date", date);
+                values.put("Score", highscore);
+                long res=db.insert("scoretable", null, values);
+//                                    if(res!=-1){
+//                                        Toast.makeText(getApplicationContext(),"values insert",Toast.LENGTH_LONG).show();
+//                                    }
+//                                    else {
+//                                        Toast.makeText(getApplicationContext(),"not insert",Toast.LENGTH_LONG).show();
+//
+//
+////                                    }
+            }
+
+        }
+
+//animation for highscore inside gameover
+        ValueAnimator animator = new ValueAnimator();
+        animator.setObjectValues(0, score_value);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                gamescorevalue.setText(String.valueOf(animation.getAnimatedValue()));
+            }
+        });
+        animator.setEvaluator(new TypeEvaluator<Integer>() {
+            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+                return Math.round(startValue + (endValue - startValue) * fraction);
+            }
+        });
+        animator.setDuration(1000);
+        animator.start();
+
+//                            gamescorevalue.setText(scorevalue.getText());
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                                    mRootLayout.addView(pausebutton);
+//                                    life1.setVisibility(View.VISIBLE);
+//                                    life2.setVisibility(View.VISIBLE);
+//
+//                                    life3.setVisibility(View.VISIBLE);
+//                                    scorevalue.setText(String.valueOf(0));
+//                                    n = 0;
+//                                    animDuration=9500;
+//                                    popupDuration=1200;
+//                                    delayValue=1000;
+//                                    task1 = new ExeTimerTask();
+//                                    new Timer().schedule(task1, delayValue, popupDuration);
+//                                    task2 = new MyTask();
+//
+//                                    new Timer().schedule(task2, animDuration, animDuration);
+//
+//                                    dialog.dismiss();
+
+                dialog.dismiss();
+                task2.cancel();
+                task1.cancel();
+                Intent intent = new Intent(getApplication(), Sample2.class);
+                Bundle b=new Bundle();
+                b.putInt("Integer", mInt);
+                intent.putExtras(b);
+                startActivity(intent);
+                Musiccontinue=true;
+
+                finish();
+
+
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), Menupage.class);
+                startActivity(intent);
+                Musiccontinue=true;
+                finish();
+            }
+        });
+        dialog.show();
+//mHandler.removeCallbacksAndMessages(null);
+        task2.cancel();
+        task1.cancel();
+        lifecounter = 0;
+    } else {
+        if (lifecounter == 0) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+            life3.setVisibility(View.INVISIBLE);
+            lifecounter++;
+        } else if (lifecounter == 1) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+            life2.setVisibility(View.INVISIBLE);
+            lifecounter++;
+
+        } else if (lifecounter == 2) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+            life1.setVisibility(View.INVISIBLE);
+            lifecounter++;
+
+        }
+
+    }
+
+}
+
+
+
 
     private void Onpausing() {
 //        mRootLayout.removeView(relativeLayout);
