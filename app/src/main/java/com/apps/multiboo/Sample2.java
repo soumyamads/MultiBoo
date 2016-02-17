@@ -229,7 +229,135 @@ public class Sample2 extends Activity {
 //            Toast.makeText(getApplication(), "NUmber" + num1+"mint"+mInt, Toast.LENGTH_SHORT).show();
 
                            if (num1 % mInt == 0) {
-                               gameoverlife();
+                               if (lifecounter == 3) {
+//                                   mp = MediaPlayer.create(Sample2.this, R.raw.wronganswer);
+//                                   mp.start();
+                                   final Dialog dialog = new Dialog(Sample2.this);
+                                   dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                                   dialog.setContentView(R.layout.gameover);
+                                   dialog.setCancelable(false);
+                                   dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                   dialog.show();
+
+                                   gamescore = (TextView) dialog.findViewById(R.id.game_over_score);
+                                   gamescorevalue = (TextView) dialog.findViewById(R.id.game_over_scorevalue);
+                                   replay = (ImageView) dialog.findViewById(R.id.replay);
+                                   menu = (ImageView) dialog.findViewById(R.id.menu);
+                                   gamescorevalue.setTypeface(custom_font);
+                                   gamescore.setTypeface(custom_font);
+                                   stopTask();
+                                   task1.cancel();
+                                   task2.cancel();
+                                   mRootLayout.removeAllViews();
+
+                                   String dateFormat = "dd/MM";
+                                   Calendar cal = Calendar.getInstance();
+                                   SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+                                   String date = sdf.format(cal.getTime());
+
+                                   final int starting = 0;
+                                   int score_value = Integer.parseInt(scorevalue.getText().toString());
+                                   SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
+                                   if(first_play) {
+                                       highscore = score_value;
+
+                                       ContentValues values = new ContentValues();
+                                       values.put("Date", date);
+                                       values.put("Score", highscore);
+                                       long res=db.insert("scoretable", null, values);
+
+                                       first_play=false;
+                                   }
+                                   else
+                                   {
+                                       if(score_value>highscore)
+                                       {
+
+                                           highscore=score_value;
+
+                                           ContentValues values = new ContentValues();
+                                           values.put("Date", date);
+                                           values.put("Score", highscore);
+                                           long res=db.insert("scoretable", null, values);
+
+                                       }
+
+                                   }
+
+//animation for highscore inside gameover
+                                   ValueAnimator animator = new ValueAnimator();
+                                   animator.setObjectValues(0, score_value);
+                                   animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                       public void onAnimationUpdate(ValueAnimator animation) {
+                                           gamescorevalue.setText(String.valueOf(animation.getAnimatedValue()));
+                                       }
+                                   });
+                                   animator.setEvaluator(new TypeEvaluator<Integer>() {
+                                       public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+                                           return Math.round(startValue + (endValue - startValue) * fraction);
+                                       }
+                                   });
+                                   animator.setDuration(1000);
+                                   animator.start();
+
+//                            gamescorevalue.setText(scorevalue.getText());
+                                   replay.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+
+                                           dialog.dismiss();
+                                           task2.cancel();
+                                           task1.cancel();
+                                           Intent intent = new Intent(getApplication(), Sample2.class);
+                                           Bundle b=new Bundle();
+                                           b.putInt("Integer", mInt);
+                                           intent.putExtras(b);
+                                           startActivity(intent);
+                                           Musiccontinue=true;
+
+//                finish();
+
+
+                                       }
+                                   });
+                                   menu.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           Intent intent = new Intent(getApplication(), Menupage.class);
+                                           startActivity(intent);
+                                           Musiccontinue = true;
+//                finish();
+                                       }
+                                   });
+
+//mHandler.removeCallbacksAndMessages(null);
+                                   task2.cancel();
+                                   task1.cancel();
+                                   lifecounter = 0;
+                               } else {
+                                   if (lifecounter == 0) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+                                       life3.setVisibility(View.INVISIBLE);
+                                       lifecounter++;
+                                   } else if (lifecounter == 1) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+                                       life2.setVisibility(View.INVISIBLE);
+                                       lifecounter++;
+
+                                   } else if (lifecounter == 2) {
+//                                mp = MediaPlayer.create(Sample2.this, R.raw.wrongblast);
+//                                mp.start();
+                                       life1.setVisibility(View.INVISIBLE);
+                                       lifecounter++;
+
+                                   }
+
+                               }
                            }
 
                        }
